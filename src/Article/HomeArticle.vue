@@ -16,7 +16,7 @@ const fetchArticle = async () => {
   await axios
     .get(API + "/article/list", header)
     .then(function (response) {
-      console.log(response);
+      console.log(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -29,10 +29,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-5 mb-4 bg-light">
-    <div class="container-fluid">
-      <h1 class="display-5 fw-bold">Index page</h1>
-      <p class="col-md-8 fs-4">List Article</p>
+  <div class="p-5 mb-4">
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Article Title</h5>
+          <p class="card-text">Article Content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="card-footer text-body-secondary">2 days ago</div>
+      </div>
     </div>
   </div>
 </template>
