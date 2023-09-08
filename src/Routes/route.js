@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 //define a route
 import HomeArticle from "../Article/HomeArticle.vue";
 import CreateArticle from "../Article/CreateArticle.vue";
-import Editarticle from "../Article/Editarticle.vue";
+import Editarticle from "../Article/EditArticle.vue";
 
 const routes = [
   {
