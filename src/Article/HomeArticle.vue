@@ -1,11 +1,20 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import Api from "../Config/Config";
+import { API } from "../Config/Config";
+import axios from "axios";
+
+const header = {
+  headers: {
+    "Content-type": "application/json",
+    Accept: "application/json",
+  },
+};
 
 const listArticle = ref([]);
 
 const fetchArticle = async () => {
-  await Api.get("/article/list")
+  await axios
+    .get(API + "/article/list", header)
     .then(function (response) {
       console.log(response);
     })
