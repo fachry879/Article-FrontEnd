@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
 import { API } from "../Config/Config";
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
 const formData = {
   category: "",
@@ -18,7 +19,7 @@ const header = {
 
 const saveArticle = async () => {
   await axios
-    .post(API + "/article/create", formData, { header })
+    .post(API + "/article/create")
     .then(function (response) {
       console.log(response);
     })
