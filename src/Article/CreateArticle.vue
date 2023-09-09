@@ -19,7 +19,7 @@ const header = {
 
 const saveArticle = async () => {
   await axios
-    .post(API + "/article/create", formData, { header })
+    .post(API + "/article/create", formData)
     .then(function (response) {
       console.log(response);
     })
@@ -30,10 +30,10 @@ const saveArticle = async () => {
 </script>
 
 <template>
-  <div class="p-5 mb-4">
+  <div class="p-5 mb-4" id="app">
     <div class="container">
       <p class="display-5 mb-3">Create New Article</p>
-      <form @submit.prevent="saveArticle">
+      <form v-on:submit.prevent="saveArticle">
         <div class="form-floating mb-3">
           <select class="form-select" id="floatingSelect" aria-label="Floating label select example" v-model="formData.category">
             <option selected disabled>Select Category . . .</option>

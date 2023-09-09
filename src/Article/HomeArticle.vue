@@ -14,7 +14,7 @@ const listArticle = ref([]);
 
 const fetchArticle = async () => {
   await axios
-    .get(API + "/article/list", header)
+    .get(API + "/article/list")
     .then(function (response) {
       console.log(response.data);
     })
