@@ -1,6 +1,5 @@
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
 import { API } from "../Config/Config";
 
 const formData = {
@@ -19,7 +18,7 @@ const header = {
 
 const saveArticle = async () => {
   await axios
-    .post(API + "/article/create", formData)
+    .post(API + "/article/create", formData, { header })
     .then(function (response) {
       console.log(response);
     })
