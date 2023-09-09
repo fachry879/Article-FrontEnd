@@ -1,11 +1,15 @@
-<script setup></script>
-
 <template>
   <div class="p-5 mb-4">
     <div class="container">
       <p class="fs-1">{{ article.title }}</p>
       <p class="fs-5 text-secondary">{{ article.publish_date }}</p>
-      <p class="fs-3">{{ article.content }}</p>
+      <p class="fs-4">{{ article.content }}</p>
+      <div class="row mt-3">
+        <div class="col-12 align-self-center">
+          <router-link :to="{ name: 'Edit Article', params: { id: idParam } }" class="btn btn-sm btn-info me-3"><i class="bi bi-pencil"></i> Edit</router-link>
+          <button v-on:click="articleDelete" class="btn btn-sm btn-danger me-3"><i class="bi bi-trash3"></i> Delete</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,19 +21,36 @@ import { API } from "../Config/Config";
 export default {
   data() {
     return {
+      idParam: this.$route.params.id,
       article: {},
     };
   },
   created() {
     axios
-      .get(API + `/article/data/${this.$route.params.id}`)
+      .get(API + `/article/data/${this.idParam}`)
       .then((response) => {
-        console.log(response.data);
         this.article = response.data;
       })
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    articleDelete() {
+      axios
+        .delete(API + `/article/delete/${this.idParam}`)
+        .then((response) => {
+          console.log(response);
+          if (response.data.status === "error") {
+            console.log(response);
+          } else if (response.data.status === "success") {
+            this.$router.push("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

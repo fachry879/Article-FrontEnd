@@ -6,9 +6,7 @@
         <div class="form-floating mb-3">
           <select class="form-control" id="floatingSelect" aria-label="Floating label select example" v-model="formData.category">
             <option selected disabled>Select Category . . .</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option v-for="categories in listCategory" :key="categories.id" :value="categories.id">{{ categories.name }}</option>
           </select>
           <label for="floatingSelect">Category</label>
           <p class="text-danger" v-if="errValidation.category !== ''">
@@ -42,6 +40,7 @@ import { API } from "../Config/Config";
 export default {
   data() {
     return {
+      listCategory: {},
       formData: {
         category: "",
         title: "",
@@ -54,13 +53,24 @@ export default {
       },
     };
   },
+  created() {
+    //get list category
+    axios
+      .get(API + "/article/category")
+      .then((response) => {
+        this.listCategory = response.data.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   methods: {
     saveArticle() {
       axios
         .post(API + "/article/create", this.formData)
         .then((response) => {
           if (response.data.status === "error") {
-            console.log(response.data);
+            // console.log(response.data);
             this.errValidation.category = response?.data?.message?.category;
             this.errValidation.title = response?.data?.message?.title;
             this.errValidation.content = response?.data?.message?.content;
