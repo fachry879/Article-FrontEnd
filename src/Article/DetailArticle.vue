@@ -3,7 +3,7 @@
     <div class="container">
       <p v-if="isLoading === false" class="text-center fs-5 mt-5">Loading Article . . .</p>
       <p class="fs-1">{{ article.title }}</p>
-      <p class="fs-5 text-secondary">{{ article.publish_date }}</p>
+      <p class="fs-5 text-secondary">{{ article.article_writer }}, {{ article.publish_date }}</p>
       <p class="fs-4">{{ article.content }}</p>
       <div class="row mt-3">
         <div class="col-12 align-self-center">
@@ -33,7 +33,8 @@ export default {
       .get(API + `/article/data/${this.idParam}`)
       .then((response) => {
         this.isLoading = true;
-        this.article = response.data;
+        this.article = response.data[0];
+        // console.log(response.data[0]);
       })
       .catch((error) => {
         this.isLoading = true;
