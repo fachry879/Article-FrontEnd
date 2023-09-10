@@ -17,6 +17,7 @@
 <script>
 import axios from "axios";
 import { API } from "../Config/Config";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -37,18 +38,53 @@ export default {
   },
   methods: {
     articleDelete() {
-      axios
-        .delete(API + `/article/delete/${this.idParam}`)
-        .then((response) => {
-          if (response.data.status === "error") {
-            console.log(response);
-          } else if (response.data.status === "success") {
-            this.$router.push("/");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Deleting Data ...",
+            html: "Please wait ...",
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          });
+          axios
+            .delete(API + `/article/delete/${this.idParam}`)
+            .then((response) => {
+              if (response.data.status === "error") {
+                Swal.fire({
+                  icon: "error",
+                  title: response.data.message,
+                  timer: 1500,
+                });
+              } else if (response.data.status === "success") {
+                Swal.fire({
+                  icon: "success",
+                  title: response.data.message,
+                  timer: 1500,
+                });
+                this.$router.push("/");
+              }
+            })
+            .catch((error) => {
+              Swal.fire({
+                icon: "error",
+                title: "An Error Occured!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            });
+        }
+      });
     },
   },
 };
