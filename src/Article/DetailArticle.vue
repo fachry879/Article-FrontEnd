@@ -1,6 +1,7 @@
 <template>
   <div class="p-5 mb-4">
     <div class="container">
+      <p v-if="isLoading === false" class="text-center fs-5 mt-5">Loading Article . . .</p>
       <p class="fs-1">{{ article.title }}</p>
       <p class="fs-5 text-secondary">{{ article.publish_date }}</p>
       <p class="fs-4">{{ article.content }}</p>
@@ -24,15 +25,18 @@ export default {
     return {
       idParam: this.$route.params.id,
       article: {},
+      isLoading: false,
     };
   },
   created() {
     axios
       .get(API + `/article/data/${this.idParam}`)
       .then((response) => {
+        this.isLoading = true;
         this.article = response.data;
       })
       .catch((error) => {
+        this.isLoading = true;
         console.log(error);
       });
   },

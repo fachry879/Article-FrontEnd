@@ -36,6 +36,7 @@
 <script>
 import axios from "axios";
 import { API } from "../Config/Config";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -66,20 +67,45 @@ export default {
   },
   methods: {
     saveArticle() {
+      Swal.fire({
+        title: "Saving Data ...",
+        html: "Please wait ...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
       axios
         .post(API + "/article/create", this.formData)
         .then((response) => {
           if (response.data.status === "error") {
             // console.log(response.data);
-            this.errValidation.category = response?.data?.message?.category;
-            this.errValidation.title = response?.data?.message?.title;
-            this.errValidation.content = response?.data?.message?.content;
+            Swal.fire({
+              icon: "error",
+              text: response.data.message,
+              timer: 2500,
+            });
+            this.errValidation.category = response?.data?.data?.category;
+            this.errValidation.title = response?.data?.data?.title;
+            this.errValidation.content = response?.data?.data?.content;
           } else if (response.data.status === "success") {
             // console.log(response);
+            Swal.fire({
+              icon: "success",
+              text: response.data.message,
+              timer: 2000,
+            });
             this.$router.push("/");
           }
         })
         .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            text: "An error occured",
+            timer: 2500,
+          });
           console.log(error);
         });
     },
