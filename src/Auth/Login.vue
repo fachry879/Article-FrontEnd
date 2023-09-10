@@ -78,7 +78,7 @@ export default {
           } else if (response.data.status === "success") {
             console.log(response.data);
             localStorage.setItem("token", response.data.token);
-            localStorage.setItem("fullName", response.data.full_name);
+            localStorage.setItem("id_user", response.data.id_user);
             Swal.fire({
               icon: "success",
               text: response.data.message,
