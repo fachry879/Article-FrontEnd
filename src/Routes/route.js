@@ -2,6 +2,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 //define a route
+import Login from "../Auth/Login.vue";
+import Register from "../Auth/Register.vue";
+
 import HomeArticle from "../Article/HomeArticle.vue";
 import CreateArticle from "../Article/CreateArticle.vue";
 import DetailArticle from "../Article/DetailArticle.vue";
@@ -10,8 +13,15 @@ import Editarticle from "../Article/EditArticle.vue";
 const routes = [
   // -------------------- Auth Routes ------------------------//
   {
-    
-  }
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
   // -------------------- End Auth Routes ------------------------//
   // -------------------- Article Routes ------------------------//
   {
