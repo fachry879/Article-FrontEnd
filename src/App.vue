@@ -4,7 +4,7 @@ import AppHeader from "./components/AppHeader.vue";
 
 <template>
   <div>
-    <AppHeader />
+    <AppHeader v-if="this.$route.name !== 'Login' && this.$route.name !== 'Register'" />
     <!--- render router view -->
     <router-view></router-view>
     <!-- end render router view -->

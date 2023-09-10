@@ -4,28 +4,28 @@
       <p class="display-5 mb-3">Create New Article</p>
       <form v-on:submit.prevent="saveArticle">
         <div class="form-floating mb-3">
-          <select class="form-control" id="floatingSelect" aria-label="Floating label select example" v-model="formData.category">
+          <select v-bind:class="{ 'form-control': true, 'is-invalid': errValidation.category }" id="floatingSelect" aria-label="Floating label select example" v-model="formData.category">
             <option selected disabled>Select Category . . .</option>
             <option v-for="categories in listCategory" :key="categories.id" :value="categories.id">{{ categories.name }}</option>
           </select>
           <label for="floatingSelect">Category</label>
-          <p class="text-danger" v-if="errValidation.category !== ''">
+          <div v-bind:class="{ 'alert alert-danger': true, 'd-none': !errValidation.category, 'mt-1': true }" role="alert">
             {{ errValidation.category }}
-          </p>
+          </div>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="Article Title" v-model="formData.title" />
+          <input type="text" v-bind:class="{ 'form-control': true, 'is-invalid': errValidation.title }" id="floatingInput" placeholder="Article Title" v-model="formData.title" />
           <label for="floatingInput">Title</label>
-          <p class="text-danger" v-if="errValidation.title !== ''">
+          <div v-bind:class="{ 'alert alert-danger': true, 'd-none': !errValidation.title, 'mt-1': true }" role="alert">
             {{ errValidation.title }}
-          </p>
+          </div>
         </div>
         <div class="form-floating mb-3">
-          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px" v-model="formData.content" />
+          <textarea v-bind:class="{ 'form-control': true, 'is-invalid': errValidation.content }" placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px" v-model="formData.content" />
           <label for="floatingTextarea">Content</label>
-          <p class="text-danger" role="alert" v-if="errValidation.content !== ''">
+          <div v-bind:class="{ 'alert alert-danger': true, 'd-none': !errValidation.content, 'mt-1': true }" role="alert">
             {{ errValidation.content }}
-          </p>
+          </div>
         </div>
         <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Save</button>
       </form>

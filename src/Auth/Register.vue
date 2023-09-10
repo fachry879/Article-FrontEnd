@@ -1,5 +1,7 @@
 <template>
-  <div>
-    <h3>Halaman Register</h3>
+  <div class="p-5 mb-4">
+    <div class="container">
+      <p>Halaman Register</p>
+    </div>
   </div>
 </template>
