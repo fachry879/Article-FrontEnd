@@ -75,7 +75,7 @@ export default {
             this.errValidation.title = response?.data?.message?.title;
             this.errValidation.content = response?.data?.message?.content;
           } else if (response.data.status === "success") {
-            console.log(response);
+            // console.log(response);
             this.$router.push("/");
           }
         })

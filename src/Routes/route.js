@@ -8,6 +8,12 @@ import DetailArticle from "../Article/DetailArticle.vue";
 import Editarticle from "../Article/EditArticle.vue";
 
 const routes = [
+  // -------------------- Auth Routes ------------------------//
+  {
+    
+  }
+  // -------------------- End Auth Routes ------------------------//
+  // -------------------- Article Routes ------------------------//
   {
     path: "/",
     name: "Home",
@@ -28,6 +34,7 @@ const routes = [
     name: "Edit Article",
     component: Editarticle,
   },
+  // -------------------- End Article Routes ------------------------//
 ];
 
 const router = createRouter({

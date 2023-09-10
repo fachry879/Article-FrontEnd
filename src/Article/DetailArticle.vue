@@ -40,7 +40,6 @@ export default {
       axios
         .delete(API + `/article/delete/${this.idParam}`)
         .then((response) => {
-          console.log(response);
           if (response.data.status === "error") {
             console.log(response);
           } else if (response.data.status === "success") {
