@@ -11,7 +11,7 @@
       </div>
       <p v-if="empty === true && isLoading === true" class="text-center fs-5 mt-5">Oopss! No article found, please create new Article first.</p>
       <p v-if="isLoading === false" class="text-center fs-5 mt-5">Loading Article . . .</p>
-      <div class="card mb-3" v-for="data in article" :key="data.id">
+      <div class="card mb-4 shadow p-3 rounded border-0" v-for="data in article" :key="data.id">
         <div class="card-body">
           <h5 class="card-title">{{ data.title }}</h5>
           <p class="card-text">{{ data.content }}</p>

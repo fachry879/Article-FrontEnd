@@ -69,7 +69,11 @@ export default {
             },
           });
           axios
-            .delete(API + `/article/delete/${this.idParam}`)
+            .delete(API + `/article/delete/${this.idParam}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            })
             .then((response) => {
               if (response.data.status === "error") {
                 Swal.fire({

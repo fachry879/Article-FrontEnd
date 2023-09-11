@@ -100,10 +100,14 @@ export default {
       });
 
       axios
-        .post(API + "/article/create", this.formData)
+        .post(API + "/article/create", this.formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
+          console.log(response.data);
           if (response.data.status === "error") {
-            // console.log(response.data);
             Swal.fire({
               icon: "error",
               text: response.data.message,

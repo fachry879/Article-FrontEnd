@@ -104,7 +104,11 @@ export default {
       });
 
       axios
-        .put(API + `/article/update/${this.idParam}`, this.formData)
+        .put(API + `/article/update/${this.idParam}`, this.formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           if (response.data.status === "error") {
             // console.log(response.data);
@@ -122,7 +126,10 @@ export default {
               text: response.data.message,
               timer: 2000,
             });
-            this.$router.push("/");
+            this.$router.push({
+              name: "Detail Article",
+              params: { id: this.idParam },
+            });
           }
         })
         .catch((error) => {

@@ -84,7 +84,7 @@ export default {
             this.errValidation.email = response?.data?.data?.email;
             this.errValidation.password = response?.data?.data?.password;
           } else if (response.data.status === "success") {
-            console.log(response.data);
+            // console.log(response.data);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("id_user", response.data.id_user);
             Swal.fire({
