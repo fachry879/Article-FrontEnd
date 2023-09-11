@@ -6,7 +6,7 @@
           <p class="fs-2">Article</p>
         </div>
         <div class="col-6">
-          <router-link :to="{ name: 'Create Article' }" class="btn btn-sm btn-success float-end"><i class="bi bi-plus-circle"></i> New Article</router-link>
+          <router-link :to="{ name: 'Create Article' }" class="btn btn-sm btn-success float-end" v-if="token"><i class="bi bi-plus-circle"></i> New Article</router-link>
         </div>
       </div>
       <p v-if="empty === true && isLoading === true" class="text-center fs-5 mt-5">Oopss! No article found, please create new Article first.</p>
@@ -33,7 +33,13 @@ export default {
       article: {},
       empty: true,
       isLoading: false,
+      token: "",
     };
+  },
+  beforeMount() {
+    if (localStorage.getItem("token")) {
+      this.token = localStorage.getItem("token");
+    }
   },
   created() {
     axios

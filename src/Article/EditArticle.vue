@@ -50,6 +50,25 @@ export default {
       },
     };
   },
+  beforeMount() {
+    if (!localStorage.getItem("token")) {
+      Swal.fire({
+        title: "Can't edit Article",
+        text: "Please login first before edit Article",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$router.push("/login");
+        } else {
+          this.$router.push("/");
+        }
+      });
+    }
+  },
   created() {
     //get data article
     axios

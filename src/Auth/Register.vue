@@ -43,6 +43,10 @@
 
               <router-link :to="{ name: 'Login' }" class="link-offset-2 link-underline link-underline-opacity-0">Login Here</router-link>
             </p>
+            <p class="text-center">
+              Back to
+              <router-link :to="{ name: 'Home' }" class="link-offset-2 link-underline link-underline-opacity-0">Home</router-link>
+            </p>
           </div>
         </div>
       </div>

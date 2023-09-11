@@ -6,7 +6,7 @@
       <p class="fs-5 text-secondary">{{ article.article_writer }}, {{ article.publish_date }}</p>
       <p class="fs-4">{{ article.content }}</p>
       <div class="row mt-3">
-        <div class="col-12 align-self-center">
+        <div class="col-12 align-self-center" v-if="token">
           <router-link :to="{ name: 'Edit Article', params: { id: idParam } }" class="btn btn-sm btn-info me-3"><i class="bi bi-pencil"></i> Edit</router-link>
           <button v-on:click="articleDelete" class="btn btn-sm btn-danger me-3"><i class="bi bi-trash3"></i> Delete</button>
         </div>
@@ -23,6 +23,7 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
+      token: "",
       idParam: this.$route.params.id,
       article: {},
       isLoading: false,
@@ -40,6 +41,11 @@ export default {
         this.isLoading = true;
         console.log(error);
       });
+  },
+  beforeMount() {
+    if (localStorage.getItem("token")) {
+      this.token = localStorage.getItem("token");
+    }
   },
   methods: {
     articleDelete() {

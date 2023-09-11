@@ -65,6 +65,25 @@ export default {
         console.log(error);
       });
   },
+  beforeMount() {
+    if (!localStorage.getItem("token")) {
+      Swal.fire({
+        title: "Can't create Article",
+        text: "Please login first before create Article",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$router.push("/login");
+        } else {
+          this.$router.push("/");
+        }
+      });
+    }
+  },
   methods: {
     saveArticle() {
       Swal.fire({

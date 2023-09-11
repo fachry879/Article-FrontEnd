@@ -29,6 +29,10 @@
 
               <router-link :to="{ name: 'Register' }" class="link-offset-2 link-underline link-underline-opacity-0">Register Here</router-link>
             </p>
+            <p class="text-center">
+              Back to
+              <router-link :to="{ name: 'Home' }" class="link-offset-2 link-underline link-underline-opacity-0">Home</router-link>
+            </p>
           </div>
         </div>
       </div>
@@ -46,7 +50,6 @@ export default {
     return {
       token: "",
       fullNameUser: "",
-      isLogin: false,
       formData: {
         email: "",
         password: "",

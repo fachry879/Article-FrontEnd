@@ -15,12 +15,10 @@
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0" role="search">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Dropdown </a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ name }} </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <router-link :to="{ name: 'Login' }" class="dropdown-item" v-if="!isLogin">Login</router-link>
+              <li><a class="dropdown-item" href="#" v-on:click="userLogout" v-if="isLogin">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -28,3 +26,41 @@
     </div>
   </nav>
 </template>
+
+<script>
+import axios from "axios";
+import { API } from "../Config/Config";
+
+export default {
+  data() {
+    return {
+      name: "Guest",
+      isLogin: false,
+    };
+  },
+  created() {
+    if (localStorage.getItem("token")) {
+      if (localStorage.getItem("id_user")) {
+        axios
+          .get(API + `/user/profile/${localStorage.getItem("id_user")}`)
+          .then((response) => {
+            // console.log(response.data);
+            this.name = response.data.full_name;
+            this.isLogin = true;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  },
+  methods: {
+    userLogout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("id_user");
+      this.isLogin = false;
+      this.$router.go(0);
+    },
+  },
+};
+</script>
