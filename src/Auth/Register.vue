@@ -38,6 +38,11 @@
                 <button class="btn btn-primary" type="submit"><i class="bi bi-box-arrow-in-right"></i> Register</button>
               </div>
             </form>
+            <p class="mt-4 text-center">
+              Have an occount ?
+
+              <router-link :to="{ name: 'Login' }" class="link-offset-2 link-underline link-underline-opacity-0">Login Here</router-link>
+            </p>
           </div>
         </div>
       </div>

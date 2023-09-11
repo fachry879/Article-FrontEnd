@@ -24,6 +24,11 @@
                 <button class="btn btn-primary" type="submit"><i class="bi bi-box-arrow-in-right"></i> Login</button>
               </div>
             </form>
+            <p class="mt-4 text-center">
+              Don't have account ?
+
+              <router-link :to="{ name: 'Register' }" class="link-offset-2 link-underline link-underline-opacity-0">Register Here</router-link>
+            </p>
           </div>
         </div>
       </div>
