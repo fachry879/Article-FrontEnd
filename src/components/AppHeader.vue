@@ -60,6 +60,11 @@ export default {
       localStorage.removeItem("id_user");
       this.isLogin = false;
       this.$router.go(0);
+      Swal.fire({
+        icon: "success",
+        text: "Logout success",
+        timer: 2000,
+      });
     },
   },
 };

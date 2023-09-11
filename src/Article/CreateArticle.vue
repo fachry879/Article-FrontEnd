@@ -46,6 +46,7 @@ export default {
         category: "",
         title: "",
         content: "",
+        writer: "",
       },
       errValidation: {
         category: "",
@@ -82,6 +83,8 @@ export default {
           this.$router.push("/");
         }
       });
+    } else {
+      this.formData.writer = localStorage.getItem("id_user");
     }
   },
   methods: {
